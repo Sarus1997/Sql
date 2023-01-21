@@ -1,0 +1,57 @@
+1.
+SQL> select book.bookno,book.bookname,borrow.startdate,borrow.enddate,borrow.mbno
+  2  from book left join borrow
+  3  on book.bookno = borrow.bookno;
+
+2.
+SQL> select E.EMPNO,E.EMPNAME,E.SALARY,M.empname,M.salary
+  2  from employee E JOIN employee M
+  3  on (E.mgrno = M.empno);
+
+3.
+SQL> SELECT book.bookno, book.bookname, member.mbno, borrow.startdate, borrow.enddate
+  2  FROM book join borrow
+  3  on (book.bookno = borrow.bookno)
+  4  join member
+  5  on (borrow.mbno = member.mbno);
+
+4.SELECT emp.empno,emp.empname,emp.position,emphiredate, man.empname, man.hiredate
+   2   from employee emo join employee man
+   3   on emp.mgrno = man.empno where emp.hiredate < man.hiredate
+
+
+5.
+SQL> select empno,empname ,(sysdate-hiredate)/30 as "date"
+  2  from employee;
+
+
+6. -
+
+
+7.
+SQL> select book.bookno, member.mbname, book.bookname, borrow.startdate, borrow.enddate
+  2  from borrow
+  3  inner join member on member.mbno = borrow.mbno
+  4  inner join book on book.bookno = borrow.bookno;
+
+
+8.
+SQL> select book.bookno, member.mbname, book.bookname, borrow.startdate, borrow.enddate, employee.empname
+  2  from borrow
+  3  inner join member on member.mbno = borrow.mbno
+  4  inner join book on book.bookno = borrow.bookno
+  5  inner join employee on employee.empno = borrow.empno;
+
+9.
+SQL> SELECT member.mbno as "member" , member.mbname as "name" , book.bookname as "book name" , book.btype as "book type"
+  2  from borrow
+  3  inner join member on member.mbno = borrow.mbno
+  4  inner join book on book.bookno = borrow.bookno;
+
+9. เวอร์ชั่น ทัน
+SQL>  select concat(member.mbno ,'-'),member.mbname as "MEMBER NAME",book.bookname as "BOOK NAME", book.btype as "BOOK TYPE"
+  2  from borrow
+  3  inner join member on member.mbno = borrow.mbno
+  4   inner join book on book.bookno = borrow.bookno
+  5  ;
+

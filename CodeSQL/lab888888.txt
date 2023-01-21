@@ -1,0 +1,44 @@
+
+1.1
+SQL> SELECT position, AVG(salary) FROM employee GROUP BY position;
+
+1.2.
+SQL> SELECT AVG(salary) FROM employee;
+
+2.1
+SQL> select count(*) from employee;
+
+2.2
+SQL> select count(mgrno) from employee;
+
+3.
+SQL> select count(position), position
+  2  from employee
+  3  group by position;
+
+4.SQL> select book.btype, count(book.btype), sum(book.price)
+  2  from book
+  3  where book.bookname <> 'data mining'
+  4  group by book.btype;
+
+5.
+SQL> select book.btype, count(book.btype) as "count_btype"
+  2  from book
+  3  group by book.btype
+  4  having count(book.btype) >= 3;
+
+6.
+SQL> select employee.empname, count(borrow.empno) as "borrowcount"
+  2  from borrow
+  3  inner join employee on employee.empno = borrow.empno
+  4  group by empname;
+
+7.
+SQL> select mbname, count(borrow.mbno)
+  2  from member join borrow
+  3  on member.mbno = borrow.mbno
+  4  group by mbname;
+
+
+
+

@@ -1,0 +1,35 @@
+
+1.
+insert into book (bookno,bookname,btype,price)
+  2  values (16, 'English' , 'Language' ,300);
+
+2.
+SQL> insert into employee (empno,empname,hiredate,salary,position,mgrno)
+  2  values (9007, 'Saharat',to_date('28/01/2022' , 'dd/mm/yy'), 25000, 'programmer' ,9003);
+
+
+3.
+SQL> update employee
+  2  set salary = (salary * 10/100)+salary
+  3  where salary <= 25000;
+
+4.
+SQL> update book
+  2  set price = (price * 5/100)+price
+  3  ;
+
+5.
+5.1 DELETE FROM borrow; ลบตารางใน borrow ทั้งหมด
+
+
+5.2 SQL> DELETE FROM borrow 
+
+2 WHERE bookno = 10; ลบข้อมูล แถวของ bookno 10 ออกไป
+
+ย้อนกลับ rollback;
+
+6.
+INSERT INTO member 
+VALUES (1006, 'RATREE');
+SAVEPOINT SP1;
+

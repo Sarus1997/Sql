@@ -1,0 +1,75 @@
+
+SQL*Plus: Release 11.2.0.2.0 Production on ┐. ┐.┐. 14 09:06:33 2022
+
+Copyright (c) 1982, 2014, Oracle.  All rights reserved.
+
+SQL> connect
+Enter user-name: Saharat
+Enter password:
+Connected.
+SQL> desc member
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MBNO                                      NOT NULL NUMBER(4)
+ MBNAME                                    NOT NULL VARCHAR2(20)
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+BOOK                           TABLE
+BORROW                         TABLE
+EMPLOYEE                       TABLE
+MEMBER                         TABLE
+
+SQL> alter table member
+  2  add Telno char(40);
+
+Table altered.
+
+
+SQL> alter table member
+  2  MODIFY telno varchar2(15);
+
+Table altered.
+
+
+SQL> alter table member
+  2  drop column telno;
+
+Table altered.
+
+SQL> desc member
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MBNO                                      NOT NULL NUMBER(4)
+ MBNAME                                    NOT NULL VARCHAR2(20)
+
+SQL> desc book
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BOOKNO                                    NOT NULL NUMBER(2)
+ BOOKNAME                                  NOT NULL VARCHAR2(20)
+ BTYPE                                     NOT NULL VARCHAR2(25)
+ PRICE                                              NUMBER(5)
+
+SQL> desc employee
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPNO                                     NOT NULL NUMBER(4)
+ EMPNAME                                   NOT NULL VARCHAR2(20)
+ HIREDATE                                           DATE
+ SALARY                                             NUMBER(10,2)
+ POSITION                                  NOT NULL VARCHAR2(25)
+ MGRNO                                              NUMBER(4)
+
+SQL> desc borrow
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ MBNO                                      NOT NULL NUMBER(4)
+ BOOKNO                                    NOT NULL NUMBER(2)
+ STARTDATE                                          DATE
+ ENDDATE                                            DATE
+ EMPNO                                              NUMBER(4)
+
+SQL>

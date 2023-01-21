@@ -1,0 +1,33 @@
+create table member(
+mbno number(4),
+mbname varchar2(20) not null,
+constraint mbno_pk primary key(mbno))
+/
+create table employee(
+empno number(4),
+empname varchar2(20) not null,
+hiredate date,
+salary number(10,2),
+position varchar2(25) not null,
+mgrno number(4),
+constraint empno_pk primary key(empno),
+constraint salary_ck check(salary < 1000000))
+/
+create table book(
+bookno number(2),
+bookname varchar2(20) not null,
+btype varchar2(15) not null,
+price number(5),
+constraint bookno_pk primary key(bookno))
+/
+create table borrow(
+mbno number(4),
+bookno number(2),
+startdate date,
+enddate date,
+empno number(4),
+constraint borrow_pk primary key(mbno,bookno),
+constraint mbno_fk foreign key(mbno) references member(mbno),
+constraint bookno_fk foreign key(bookno) references book(bookno),
+constraint empno_fk foreign key(empno) references employee(empno))
+/

@@ -1,0 +1,26 @@
+1.
+SQL> create view empview1
+  2  as select emp.empno, emp.empname, emp.position, emp.salary, mgr.mgrno as "manager"
+  3  from employee emp join employee mgr
+  4  on emp.mgrno = mgr.empno;
+
+2.
+select * from empview1;
+
+4.
+SQL> CREATE OR REPLACE VIEW empview1 as
+  2  select emp.empno, emp.empname, emp.position, emp.salary, mgr.mgrno as "manager"
+  3  from employee emp join employee mgr
+  4  on emp.mgrno = mgr.empno
+  5  where emp.salary between 20000 and 50000;
+
+7.
+select ic.index_name, ic.column_name
+  2  from user_indexes ix, user_ind_columns ic
+  3  WHERE ic.index_name = ix.index_name
+  4  AND ic.table_name = 'BORROW';
+
+เวอร์ชั่น 2
+SQL> select index_name,column_name
+  2  from user_ind_columns
+  3  where table_name = 'BORROW';

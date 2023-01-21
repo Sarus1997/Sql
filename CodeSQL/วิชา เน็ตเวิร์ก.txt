@@ -1,0 +1,99 @@
+
+Gateway(config)#interface gigabitEthernet 0/0
+Gateway(config-if)#ip address 202.56.43.2 255.255.255.252
+Gateway(config-if)#no shutdown
+
+BA(config)#vlan 10
+BA(config-vlan)#vlan 10
+BA(config-vlan)#vlan 20
+BA(config-vlan)#vlan 30
+BA(config-vlan)#exit
+
+BA(config)#interface range fastEthernet 0/1-8
+BA(config-if-range)#exit
+BA(config)#exit
+
+BA#configure
+Configuring from terminal, memory, or network [terminal]? 
+Enter configuration commands, one per line.  End with CNTL/Z.
+BA(config)#interface range fastEthernet 0/1-8
+BA(config-if-range)#switchport mode access
+BA(config-if-range)#switchport access vlan 10
+BA(config-if-range)#
+
+BA(config)#interface range fastEthernet 0/9-16
+BA(config-if-range)#switchport mode access
+BA(config-if-range)#switchport access vlan 20
+BA(config-if-range)#exit
+BA(config)#interface range fastEthernet 0/17-24
+BA(config-if-range)#switchport mode access
+BA(config-if-range)#switchport access vlan 30
+BA(config-if-range)#exit
+BA(config)#
+
+BA(config)#interface gigabitEthernet 0/1
+BA(config-if)#interface gigabitEthernet 0/1
+
+Gateway>ena
+Gateway#conf
+Configuring from terminal, memory, or network [terminal]? 
+Enter configuration commands, one per line.  End with CNTL/Z.
+Gateway(config)#interface gigabitEthernet 0/1.1
+Gateway(config-subif)#encapsulation dot1Q 10
+Gateway(config-subif)#ip address 1.1.1.1 255.255.255.0
+Gateway(config-subif)#exit
+Gateway(config-subif)#encapsulation dot1Q 20
+Gateway(config-subif)#ip address 2.2.2.1 255.255.255.0
+Gateway(config-subif)#exit
+Gateway(config)#interface gigabitEthernet 0/1.3
+Gateway(config-subif)#encapsulation dot1Q 30
+Gateway(config-subif)#ip address 3.3.3.1 255.255.255.0
+Gateway(config-subif)#exit
+Gateway(config)#
+
+Gateway(config)#interface gigabitEthernet 0/1
+Gateway(config-if)#no shutdown
+Gateway(config-if)#exit
+Gateway(config)#
+
+BA>ena
+BA#conf
+Configuring from terminal, memory, or network [terminal]? 
+Enter configuration commands, one per line.  End with CNTL/Z.
+BA(config)#interface GigabitEthernet0/1
+BA(config-if)#switchport mode trunk
+BA(config-if)#no shut down
+BA(config-if)#exit
+BA(config)#interface GigabitEthernet0/2
+BA(config-if)#switchport mode trunk
+BA(config-if)#no shutdown
+BA(config-if)#exit
+BA(config)#
+
+
+Gateway>ena
+Gateway#conf
+Configuring from terminal, memory, or network [terminal]? 
+Enter configuration commands, one per line.  End with CNTL/Z.
+Gateway(config)#ip dhcp excluded-address 1.1.1.1 1.1.1.50
+
+Gateway(config)#ip dhcp pool TeamA
+Gateway(dhcp-config)#network 1.1.1.0 255.255.255.0
+Gateway(dhcp-config)#default-router 1.1.1.1
+Gateway(dhcp-config)#exit
+Gateway(config)#exit
+
+Gateway(config)#ip dhcp excluded-address 2.2.2.1 2.2.2.50
+Gateway(config)#ip dhcp pool TeamB
+Gateway(dhcp-config)#network 2.2.2.0 255.255.255.0
+Gateway(dhcp-config)#default-router 2.2.2.2
+Gateway(dhcp-config)#exit
+
+Gateway(config)#ip dhcp excluded-address 3.3.3.1 3.3.3.50
+Gateway(config)#ip dhcp pool TeamC
+Gateway(dhcp-config)#network 3.3.3.0 255.255.255.0
+Gateway(dhcp-config)#default-router 3.3.3.3
+Gateway(dhcp-config)#exit
+Gateway(config)#exit
+Gateway#
+

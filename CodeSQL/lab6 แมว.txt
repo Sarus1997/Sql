@@ -1,0 +1,187 @@
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID
+------------------------------ ------- ----------
+BOOK                           TABLE
+BORROW                         TABLE
+EMPLOYEE                       TABLE
+MEMBER                         TABLE
+
+SQL> select book,price;
+select book,price
+                *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected
+
+
+SQL> select distinct bookname,price from book where btype = 'COMPUTER';
+
+no rows selected
+
+SQL> select bookname,price from book where btype = 'COMPUTER';
+
+no rows selected
+
+SQL> select * from book;
+
+    BOOKNO BOOKNAME             BTYPE                PRICE
+---------- -------------------- --------------- ----------
+        10 c progaammimg        computer               250
+        11 data mining          computer               280
+        12 calculus             math                   190
+        13 cost acconing        business               220
+        14 happy potter         general                450
+        15 oracle database      computer               345
+
+6 rows selected
+
+
+SQL> select bookname,price from book where btype = 'computer';
+
+BOOKNAME                  PRICE
+-------------------- ----------
+c progaammimg               250
+data mining                 280
+oracle database             345
+
+SQL> select * from borrow;
+
+      MBNO     BOOKNO STARTDATE     ENDDATE            EMPNO
+---------- ---------- ------------- ------------- ----------
+      1001         10 15 ┐.┐.  2020 25 ┐.┐.  2020       9004
+      1002         12 18 ┐.┐.  2020 28 ┐.┐.  2020       9006
+      1004         13 21 ┐.┐.  2020 31 ┐.┐.  2020       9004
+      1002         15 01 ┐┐.┐. 2020 11 ┐┐.┐. 2020       9005
+      1001         11 17 ┐.┐.  2020 27 ┐.┐.  2020       9005
+
+
+SQL> select * from employee;
+
+     EMPNO EMPNAME              HIREDATE          SALARY
+---------- -------------------- ------------- ----------
+POSITION                       MGRNO
+------------------------- ----------
+      9001 benjawan             11 ┐┐.┐. 2009       8500
+director
+
+      9002 benjawan             14 ┐.┐.  2009      26000
+senior libraian                 9001
+
+      9003 tawatchai            03 ┐┐.┐. 2010      26000
+clerk                           9002
+
+
+     EMPNO EMPNAME              HIREDATE          SALARY
+---------- -------------------- ------------- ----------
+POSITION                       MGRNO
+------------------------- ----------
+      9004 wichai               25 ┐.┐.  2010      40000
+librarian                       9002
+
+      9005 thidarat             01 ┐.┐.  2011       9500
+clerk                           9002
+
+      9006 ternjai              19 ┐.┐.  2011      25000
+librarian                       9002
+
+
+SQL> select empname,position,salary*12 from employee where position like '%lib%';
+
+EMPNAME              POSITION                   SALARY*12
+-------------------- ------------------------- ----------
+benjawan             senior libraian               312000
+wichai               librarian                     480000
+ternjai              librarian                     300000
+
+SQL> select * from employee where salary > 20000 and not position ='director';
+
+     EMPNO EMPNAME              HIREDATE          SALARY
+---------- -------------------- ------------- ----------
+POSITION                       MGRNO
+------------------------- ----------
+      9002 benjawan             14 ┐.┐.  2009      26000
+senior libraian                 9001
+
+      9003 tawatchai            03 ┐┐.┐. 2010      26000
+clerk                           9002
+
+      9004 wichai               25 ┐.┐.  2010      40000
+librarian                       9002
+
+
+     EMPNO EMPNAME              HIREDATE          SALARY
+---------- -------------------- ------------- ----------
+POSITION                       MGRNO
+------------------------- ----------
+      9006 ternjai              19 ┐.┐.  2011      25000
+librarian                       9002
+
+
+SQL> select empname,hiredate,salary,position from employee order by hiredate;
+
+EMPNAME              HIREDATE          SALARY POSITION
+-------------------- ------------- ---------- -------------------------
+benjawan             11 ┐┐.┐. 2009       8500 director
+benjawan             14 ┐.┐.  2009      26000 senior libraian
+tawatchai            03 ┐┐.┐. 2010      26000 clerk
+wichai               25 ┐.┐.  2010      40000 librarian
+ternjai              19 ┐.┐.  2011      25000 librarian
+thidarat             01 ┐.┐.  2011       9500 clerk
+
+6 rows selected.
+
+SQL> select empname
+  2  hiredate,salary,position
+  3  from employee order by hiredate;
+
+HIREDATE                 SALARY POSITION
+-------------------- ---------- -------------------------
+benjawan                   8500 director
+benjawan                  26000 senior libraian
+tawatchai                 26000 clerk
+ternjai                   25000 librarian
+thidarat                   9500 clerk
+wichai                    40000 librarian
+
+6 rows selected.
+
+SQL> select empname,mgrno
+  2   from employee where
+  3  mgrno is null;
+
+EMPNAME                   MGRNO
+-------------------- ----------
+benjawan
+
+SQL> select empname,hiredate,salary,position
+  2  from employee where position
+  3  not like '%LIB%';
+
+EMPNAME              HIREDATE          SALARY POSITION
+-------------------- ------------- ---------- -------------------------
+benjawan             11 ┐┐.┐. 2009       8500 director
+benjawan             14 ┐.┐.  2009      26000 senior libraian
+tawatchai            03 ┐┐.┐. 2010      26000 clerk
+wichai               25 ┐.┐.  2010      40000 librarian
+thidarat             01 ┐.┐.  2011       9500 clerk
+ternjai              19 ┐.┐.  2011      25000 librarian
+
+6 rows selected.
+
+SQL> select empname,hiredate,salary,position
+  2  from employee
+  3  where empname like '%CHAI%';
+
+no rows selected
+
+SQL> select empname,hiredate,salary,position
+  2  from employee
+  3  where empname like '%chai%';
+
+EMPNAME              HIREDATE          SALARY POSITION
+-------------------- ------------- ---------- -------------------------
+tawatchai            03 ┐┐.┐. 2010      26000 clerk
+wichai               25 ┐.┐.  2010      40000 librarian
+
+SQL>

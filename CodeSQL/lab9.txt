@@ -1,0 +1,30 @@
+1.
+SQL> select rownum as rank, bookname, price
+  2  from (select bookname,price from book order by price)
+  3  where rownum <= 4;
+
+2.
+SQL> select * from employee
+  2  where salary > all (select salary from employee
+  3  where position = 'clerk');
+
+3.
+SQL> select * from employee
+  2  where salary > any(select avg(salary) from employee);
+
+4.
+SQL> select * from employee
+  2  where position <>all
+  3  (select position from employee where position = 'clerk');
+
+5.
+SQL> select member.mbno, member.mbname
+  2  from borrow
+  3  inner join member on member.mbno = borrow.mbno
+  4  inner join employee on employee.empno = borrow.empno
+  5  where employee.salary > any(select salary from employee where position <> 'director');
+
+6.SQL> 
+SQL> select rownum as rank, empname, salary
+  2  from (select empname, salary from employee order by salary)
+  3  where rownum <= 3;
